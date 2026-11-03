@@ -171,51 +171,68 @@ Two POSIX threads each increment a counter 100,000 times, guarded by a binary se
 
 ## Comparison Graphs
 
-Execution time in seconds for each mechanism (lower is better). All charts use the same 0 to 0.7 s scale so they can be compared directly.
+Execution time in seconds (lower is better). Colour key: **red = None**, **orange = Critical**, **green = Atomic**, **blue = Lock**. All charts use the same 0 to 0.7 s scale so they can be compared directly.
 
 **1 thread**
 
 ```mermaid
+%%{init: {"theme":"base","themeVariables":{"xyChart":{"backgroundColor":"#ffffff","titleColor":"#000000","xAxisLabelColor":"#000000","xAxisTitleColor":"#000000","xAxisTickColor":"#000000","xAxisLineColor":"#000000","yAxisLabelColor":"#000000","yAxisTitleColor":"#000000","yAxisTickColor":"#000000","yAxisLineColor":"#000000","plotColorPalette":"#d62728, #ff7f0e, #2ca02c, #1f77b4"}}}}%%
 xychart-beta
     title "Execution time at 1 thread (s)"
     x-axis [None, Critical, Atomic, Lock]
     y-axis "Seconds" 0 --> 0.7
-    bar [0.0043, 0.0900, 0.0539, 0.0890]
+    bar [0.0043, 0, 0, 0]
+    bar [0, 0.0900, 0, 0]
+    bar [0, 0, 0.0539, 0]
+    bar [0, 0, 0, 0.0890]
 ```
 
 **2 threads**
 
 ```mermaid
+%%{init: {"theme":"base","themeVariables":{"xyChart":{"backgroundColor":"#ffffff","titleColor":"#000000","xAxisLabelColor":"#000000","xAxisTitleColor":"#000000","xAxisTickColor":"#000000","xAxisLineColor":"#000000","yAxisLabelColor":"#000000","yAxisTitleColor":"#000000","yAxisTickColor":"#000000","yAxisLineColor":"#000000","plotColorPalette":"#d62728, #ff7f0e, #2ca02c, #1f77b4"}}}}%%
 xychart-beta
     title "Execution time at 2 threads (s)"
     x-axis [None, Critical, Atomic, Lock]
     y-axis "Seconds" 0 --> 0.7
-    bar [0.0073, 0.2743, 0.1226, 0.3494]
+    bar [0.0073, 0, 0, 0]
+    bar [0, 0.2743, 0, 0]
+    bar [0, 0, 0.1226, 0]
+    bar [0, 0, 0, 0.3494]
 ```
 
 **4 threads**
 
 ```mermaid
+%%{init: {"theme":"base","themeVariables":{"xyChart":{"backgroundColor":"#ffffff","titleColor":"#000000","xAxisLabelColor":"#000000","xAxisTitleColor":"#000000","xAxisTickColor":"#000000","xAxisLineColor":"#000000","yAxisLabelColor":"#000000","yAxisTitleColor":"#000000","yAxisTickColor":"#000000","yAxisLineColor":"#000000","plotColorPalette":"#d62728, #ff7f0e, #2ca02c, #1f77b4"}}}}%%
 xychart-beta
     title "Execution time at 4 threads (s)"
     x-axis [None, Critical, Atomic, Lock]
     y-axis "Seconds" 0 --> 0.7
-    bar [0.0076, 0.5944, 0.1163, 0.5705]
+    bar [0.0076, 0, 0, 0]
+    bar [0, 0.5944, 0, 0]
+    bar [0, 0, 0.1163, 0]
+    bar [0, 0, 0, 0.5705]
 ```
 
 **8 threads**
 
 ```mermaid
+%%{init: {"theme":"base","themeVariables":{"xyChart":{"backgroundColor":"#ffffff","titleColor":"#000000","xAxisLabelColor":"#000000","xAxisTitleColor":"#000000","xAxisTickColor":"#000000","xAxisLineColor":"#000000","yAxisLabelColor":"#000000","yAxisTitleColor":"#000000","yAxisTickColor":"#000000","yAxisLineColor":"#000000","plotColorPalette":"#d62728, #ff7f0e, #2ca02c, #1f77b4"}}}}%%
 xychart-beta
     title "Execution time at 8 threads (s)"
     x-axis [None, Critical, Atomic, Lock]
     y-axis "Seconds" 0 --> 0.7
-    bar [0.0077, 0.6025, 0.1192, 0.6084]
+    bar [0.0077, 0, 0, 0]
+    bar [0, 0.6025, 0, 0]
+    bar [0, 0, 0.1192, 0]
+    bar [0, 0, 0, 0.6084]
 ```
 
 **Race condition: how much of the expected count survives (no synchronization)**
 
 ```mermaid
+%%{init: {"theme":"base","themeVariables":{"xyChart":{"backgroundColor":"#ffffff","titleColor":"#000000","xAxisLabelColor":"#000000","xAxisTitleColor":"#000000","xAxisTickColor":"#000000","xAxisLineColor":"#000000","yAxisLabelColor":"#000000","yAxisTitleColor":"#000000","yAxisTickColor":"#000000","yAxisLineColor":"#000000","plotColorPalette":"#d62728"}}}}%%
 xychart-beta
     title "Final count as % of expected (None)"
     x-axis "Threads" [1, 2, 4, 8]
@@ -227,10 +244,10 @@ xychart-beta
 
 | Mechanism | 1 thread | 2 threads | 4 threads | 8 threads |
 |---|---:|---:|---:|---:|
-| None | 1.0x | 1.7x | 1.8x | 1.8x |
-| Critical | 1.0x | 3.0x | 6.6x | 6.7x |
-| Atomic | 1.0x | 2.3x | 2.2x | 2.2x |
-| Lock | 1.0x | 3.9x | 6.4x | 6.8x |
+| 🔴 None | 1.0x | 1.7x | 1.8x | 1.8x |
+| 🟠 Critical | 1.0x | 3.0x | 6.6x | 6.7x |
+| 🟢 Atomic | 1.0x | 2.3x | 2.2x | 2.2x |
+| 🔵 Lock | 1.0x | 3.9x | 6.4x | 6.8x |
 
 ## Observations
 
