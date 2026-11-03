@@ -95,7 +95,7 @@ Threads increment a shared counter with no protection. `counter++` is a read, an
 for (long i = 0; i < 10000000; i++) counter++;
 ```
 
-![Race condition output](screenshots/race_condition.png)
+![Race condition output](screenshots/race condition.png)
 
 ### 2. Critical Section
 Wrapping the update in `#pragma omp critical` serializes access, so the result is always correct, at the cost of speed.
@@ -108,7 +108,7 @@ for (long i = 0; i < 10000000; i++) {
 }
 ```
 
-![Critical section output](screenshots/critical_section.png)
+![Critical section output](screenshots/critical section.png)
 
 ### 3. Atomic Operation
 `#pragma omp atomic` performs the increment with a single hardware-supported instruction. It is correct and much lighter than a critical section.
